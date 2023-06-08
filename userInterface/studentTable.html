@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Students Details</title>
+  </head>
+  <body>
+    <form onsubmit="return false">
+        <fieldset>
+            <h2>Student Registration</h2>
+      <label for="id">id: </label>
+      <input id="id" type="text" /> <br />
+      <br />
+      <label for="name">name: </label>
+      <input type="text" name="name" id="name" /> <br /><br />
+      <label for="email">email: </label>
+      <input type="email" name="email" id="email" /> <br /><br />
+      <label for="password">password: </label>
+      <input type="password" name="password" id="password" /> <br /><br />
+      <!-- <input type="button" value="add" onclick="enterDetails()"> -->
+      <button id="button" onclick="enterDetails()">add</button>
+    </fieldset>
+    </form>
+    <br />
+    <table id="table" border="1px solid black">
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>email</th>
+        <th>password</th>
+      </tr>
+    </table>
+
+    <script>
+      const studentsArray = [];
+      const id = document.getElementById("id");
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const table = document.getElementById("table");
+      const password = document.getElementById("password");
+      function enterDetails() {
+        let student = {
+          id: id.value,
+          name: name.value,
+          email: email.value,
+          password: password.value
+        };
+        // const {id, name, email, password} = student;
+        let newRow = `<tr>
+               <td>${student.id}</td>
+               <td>${student.name}</td>
+               <td>${student.email}</td>
+               <td>${student.password}</td>
+             </tr>`;
+
+        studentsArray.push(student);
+        console.log(studentsArray);
+
+        table.insertAdjacentHTML("beforeend", newRow);
+      }
+    </script>
+  </body>
+</html>

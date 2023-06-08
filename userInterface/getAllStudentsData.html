@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Get Student Detail</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- <div id="mainDiv">
+      <form action="" id="myForm">
+        <fieldset>
+          <legend>Login</legend>
+          <label for="userId">userId </label><br />
+          <input type="text" id="userId" required /> <br />
+          <label for="password">password </label> <br />
+          <input type="password" id="password" required /> <br />
+          <input id="login" type="button" value="Login" />
+          <p id="errorMessage"></p>
+        </fieldset>
+      </form>
+    </div> -->
+    <script>
+    //   const userId = document.getElementById("userId");
+    //   const password = document.getElementById("password");
+    //   const login = document.getElementById("login");
+    //   const errorMessage = document.getElementById("errorMessage");
+
+    //   login.addEventListener("click", (e) => {
+    //     e.preventDefault();
+    //     console.log(userId.value )
+    //     console.log(password.value )
+    //     if (userId.value !== "vijay" || password.value !== "asdfg") {
+    //         errorMessage.innerHTML = "invalid credentials";
+    //         errorMessage.style.color = "red";
+    //         errorMessage.style.display = "block";
+    //         return "invalid"
+    //     }
+        axios.get(`http://localhost:7000/students`)
+        .then((response) => {
+        //   errorMessage.style.display = "none";
+          console.log(response.data);
+          const students = response.data ;
+          const mainDiv = document.createElement("div");
+          mainDiv.innerHTML = 
+            `<table class="table" border="solid" cellspacing="0px" cellpadding="5px">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+        <tr>
+        </table>`
+
+        document.body.append(mainDiv);
+      let table = document.querySelector("table");
+      for (let student of students) {
+        let tr = table.insertRow();
+        tr.insertCell().textContent = student.id;
+        tr.insertCell().textContent = student.name;
+        tr.insertCell().textContent = student.email;
+      }
+    })
+// });
+    //   });
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Get Student Detail</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="mainDiv">
+      <form action="" id="myForm">
+        <fieldset>
+          <legend>Student Details</legend>
+          <label for="id">id: </label>
+          <input type="text" id="id" required /> <br />
+          <br />
+          <input id="getData" type="submit" value="Get Data" /> <br />
+          <p id="result"></p>
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      const form = document.getElementById("myForm");
+      const id = document.getElementById("id");
+      const getData = document.getElementById("getData");
+      const result = document.getElementById("result");
+      getData.addEventListener("click", (e) => {
+        e.preventDefault();
+        axios
+          .get(`http://localhost:7000/students/${id.value}`)
+          .then((response) => {
+            result.style.display = "none";
+            const res = response.data;
+            console.log(res);
+            const {id, name, email} = res;
+            const div = document.createElement("div");
+            div.innerHTML = `<table class="table" border="solid" cellspacing="0px" cellpadding="5px">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </tr>
+        <tr>
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${email}</td>
+         </tr>
+    </table>`;
+            document.body.append(div);
+          })
+          .catch((error) => {
+            console.error(error.response.data);
+            result.innerHTML = error.response.data;
+            result.style.color = "red";
+            result.style.display = "block";
+          });
+      });
+    </script>
+  </body>
+</html>

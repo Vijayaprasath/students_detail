@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Get Student Detail</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+  </head>
+  <body>
+    <div id="mainDiv">
+      <form action="" id="myForm">
+        <fieldset>
+          <legend>Login</legend>
+          <label for="userId">userId </label><br />
+          <input type="text" id="userId" required /> <br />
+          <label for="password">password </label> <br />
+          <input type="password" id="password" required /> 
+          <input type="checkbox" name="check" id="check"><br />
+          <input id="login" type="button" value="Login" />
+          <p id="errorMessage"></p>
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      const check = document.getElementById('check');
+      const userId = document.getElementById("userId");
+      const password = document.getElementById("password");
+      const login = document.getElementById("login");
+      const errorMessage = document.getElementById("errorMessage");
+
+      login.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log(userId.value);
+        console.log(password.value);
+        if (userId.value !== "vijay" || password.value !== "asdfg") {
+          errorMessage.innerHTML = "invalid credentials";
+          errorMessage.style.color = "red";
+          errorMessage.style.display = "block";
+          return "invalid";
+        }
+        window.location.href = "getData.html"
+        errorMessage.style.display = "none";
+        // const studentDiv = document.createElement("div");
+        // studentDiv.innerHTML = `<ul><li><a href="http://127.0.0.1:5500/userInterface/getStudentData.html?">Student id<a></li>
+        //     <li><a href="http://127.0.0.1:5500/userInterface/getAllStudentsData.html">All Students Details<a></li></ul>`;
+        // document.body.append(studentDiv);
+      });
+      check.onclick = togglePassword;
+      function togglePassword(){
+        if(check.checked)
+          password.type = 'text';
+        else 
+          password.type = 'password';
+      }
+    </script>
+  </body>
+</html>

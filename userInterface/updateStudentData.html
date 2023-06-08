@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Update Student Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="mainDiv">
+      <form action="" id="myForm">
+        <fieldset>
+          <legend>Update Student Detail</legend>
+          <label for="id">id: </label>
+          <input type="text" id="id" /> <br />
+          <br />
+          <label for="name">name: </label>
+          <input type="text" id="name" /> <br /><br />
+          <label for="email">email: </label>
+          <input type="email" id="email" /> <br /><br />
+          <input id="update" type="button" value="Update Data" />
+          <p id="result"></p>
+        </fieldset>
+      </form>
+    </div>
+    <script>
+      const form = document.getElementById("myForm");
+      const id = document.getElementById("id");
+      const name = document.getElementById("name");
+      const email = document.getElementById("email");
+      const update = document.getElementById("update");
+      const result = document.getElementById("result");
+
+      update.addEventListener("click", (e) => {
+        e.preventDefault();
+        const data = {
+          id: id.value,
+          name: name.value,
+          email: email.value,
+        };
+        console.log(data);
+
+        axios
+          .put(`http://localhost:7000/students/${id.value}`, data)
+          .then((response) => {
+            console.log(response.data)
+            result.innerHTML = "updated Successfully";
+            result.style.color = "darkGreen";
+            result.style.display = "block";
+            form.reset();
+            setTimeout(() => {
+              result.style.display = "none";
+            }, 1500);
+          })
+          .catch((error) => {
+            console.error(error.response.data);
+            result.innerHTML = error.response.data;
+            result.style.color = "red";
+            result.style.display = "block";
+        });
+      });
+    </script>
+  </body>
+</html>
